@@ -39,6 +39,7 @@ export const entryListChildrenDescription: INodeProperties[] = [
 			send: {
 				type: 'query',
 				property: 'nextCursor',
+				value: '={{$value || undefined}}',
 			},
 		},
 	},

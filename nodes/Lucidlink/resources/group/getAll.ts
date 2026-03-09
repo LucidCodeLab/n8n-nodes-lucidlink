@@ -11,7 +11,7 @@ export const groupGetAllDescription: INodeProperties[] = [
 		displayOptions: { show },
 		description: 'Filter groups by name (optional)',
 		routing: {
-			send: { type: 'query', property: 'name' },
+			send: { type: 'query', property: 'name', value: '={{$value || undefined}}' },
 		},
 	},
 ];

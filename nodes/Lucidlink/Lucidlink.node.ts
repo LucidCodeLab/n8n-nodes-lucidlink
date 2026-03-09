@@ -42,6 +42,7 @@ export class Lucidlink implements INodeType {
 					{ name: 'External Entry', value: 'externalEntry' },
 					{ name: 'Filespace', value: 'filespace' },
 					{ name: 'Group', value: 'group' },
+					{ name: 'Health', value: 'health' },
 					{ name: 'Member', value: 'member' },
 					{ name: 'Permission', value: 'permission' },
 					{ name: 'Provider', value: 'provider' },
@@ -59,6 +60,26 @@ export class Lucidlink implements INodeType {
 					show: { resource: ['entry', 'dataStore', 'externalEntry', 'permission'] },
 				},
 				description: 'ID of the filespace to operate on',
+			},
+			// Health resource — single operation, inlined
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: { show: { resource: ['health'] } },
+				options: [
+					{
+						name: 'Check',
+						value: 'check',
+						action: 'Check LucidAPI health',
+						description: 'Check if the LucidAPI instance is responsive',
+						routing: {
+							request: { method: 'GET', url: '/api/v1/health' },
+						},
+					},
+				],
+				default: 'check',
 			},
 			// Provider resource — single operation, inlined
 			{

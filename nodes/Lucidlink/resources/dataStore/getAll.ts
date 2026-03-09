@@ -11,7 +11,7 @@ export const dataStoreGetAllDescription: INodeProperties[] = [
 		displayOptions: { show },
 		description: 'Filter data stores by name (optional)',
 		routing: {
-			send: { type: 'query', property: 'name' },
+			send: { type: 'query', property: 'name', value: '={{$value || undefined}}' },
 		},
 	},
 ];

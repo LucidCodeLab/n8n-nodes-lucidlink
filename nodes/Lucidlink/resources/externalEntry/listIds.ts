@@ -36,7 +36,7 @@ export const externalEntryListIdsDescription: INodeProperties[] = [
 		description:
 			'Pagination cursor from the previous response. Leave empty to start from the beginning.',
 		routing: {
-			send: { type: 'query', property: 'nextCursor' },
+			send: { type: 'query', property: 'nextCursor', value: '={{$value || undefined}}' },
 		},
 	},
 ];

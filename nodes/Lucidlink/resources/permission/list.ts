@@ -11,7 +11,7 @@ export const permissionListDescription: INodeProperties[] = [
 		displayOptions: { show },
 		description: 'Filter permissions by principal (member or group) ID (optional)',
 		routing: {
-			send: { type: 'query', property: 'principalId' },
+			send: { type: 'query', property: 'principalId', value: '={{$value || undefined}}' },
 		},
 	},
 	{
@@ -35,7 +35,7 @@ export const permissionListDescription: INodeProperties[] = [
 		description:
 			'Pagination cursor from the previous response. Leave empty to start from the beginning.',
 		routing: {
-			send: { type: 'query', property: 'nextCursor' },
+			send: { type: 'query', property: 'nextCursor', value: '={{$value || undefined}}' },
 		},
 	},
 ];

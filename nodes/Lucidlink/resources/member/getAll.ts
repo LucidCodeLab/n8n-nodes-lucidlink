@@ -12,7 +12,7 @@ export const memberGetAllDescription: INodeProperties[] = [
 		displayOptions: { show },
 		description: 'Filter members by email address (optional)',
 		routing: {
-			send: { type: 'query', property: 'email' },
+			send: { type: 'query', property: 'email', value: '={{$value || undefined}}' },
 		},
 	},
 ];

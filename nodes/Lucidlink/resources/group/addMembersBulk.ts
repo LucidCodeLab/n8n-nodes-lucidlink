@@ -23,7 +23,7 @@ export const groupAddMembersBulkDescription: INodeProperties[] = [
 						type: 'string',
 						required: true,
 						default: '',
-						description: 'Principal ID of the group',
+						description: 'UUID of the group',
 					},
 					{
 						displayName: 'Member ID',
@@ -31,7 +31,7 @@ export const groupAddMembersBulkDescription: INodeProperties[] = [
 						type: 'string',
 						required: true,
 						default: '',
-						description: 'Principal ID of the member',
+						description: 'UUID of the member',
 					},
 				],
 			},
@@ -40,8 +40,7 @@ export const groupAddMembersBulkDescription: INodeProperties[] = [
 			send: {
 				type: 'body',
 				property: 'memberships',
-				value:
-					'={{$parameter["memberships"]["membershipValues"]}}',
+				value: '={{$value["membershipValues"]}}',
 			},
 		},
 	},

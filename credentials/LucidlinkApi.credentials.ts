@@ -47,7 +47,7 @@ export class LucidlinkApi implements ICredentialType {
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: '={{$credentials.baseUrl}}',
-			url: '/api/v1/filespaces',
+			url: '/api/v1/health',
 		},
 	};
 }
