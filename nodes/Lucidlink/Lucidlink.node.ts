@@ -72,7 +72,7 @@ export class Lucidlink implements INodeType {
 					{
 						name: 'Check',
 						value: 'check',
-						action: 'Check LucidAPI health',
+						action: 'Check lucid api health',
 						description: 'Check if the LucidAPI instance is responsive',
 						routing: {
 							request: { method: 'GET', url: '/api/v1/health' },
