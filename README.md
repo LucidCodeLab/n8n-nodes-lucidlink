@@ -127,7 +127,7 @@ The LucidLink LucidAPI is self-hosted, so you configure the connection endpoint 
    | **Base URL**  | Full base URL of your LucidAPI instance, including port | `http://localhost:7778` |
    | **API Token** | Bearer token for your service account                   | `eyJ...`                |
 
-3. Click **Save** — n8n will test the credential by hitting `GET /api/v1/filespaces` and confirm it can connect.
+3. Click **Save** — n8n will test the credential by hitting `GET /api/v1/health` and confirm it can connect.
 
 ---
 
