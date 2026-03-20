@@ -7,7 +7,6 @@ export const directLinkGenerateDescription: INodeProperties[] = [
 		displayName: 'Entry ID',
 		name: 'entryId',
 		type: 'string',
-		required: false,
 		default: '',
 		displayOptions: { show },
 		description:
@@ -24,7 +23,6 @@ export const directLinkGenerateDescription: INodeProperties[] = [
 		displayName: 'Path',
 		name: 'path',
 		type: 'string',
-		required: false,
 		default: '',
 		displayOptions: { show },
 		description:
