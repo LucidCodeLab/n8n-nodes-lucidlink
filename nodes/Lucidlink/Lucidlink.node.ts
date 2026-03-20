@@ -2,6 +2,7 @@ import { NodeConnectionTypes, type INodeType, type INodeTypeDescription } from '
 import { filespaceDescription } from './resources/filespace';
 import { entryDescription } from './resources/entry';
 import { dataStoreDescription } from './resources/dataStore';
+import { directLinkDescription } from './resources/directLink';
 import { externalEntryDescription } from './resources/externalEntry';
 import { groupDescription } from './resources/group';
 import { memberDescription } from './resources/member';
@@ -38,6 +39,7 @@ export class Lucidlink implements INodeType {
 				noDataExpression: true,
 				options: [
 					{ name: 'Data Store', value: 'dataStore' },
+					{ name: 'Direct Link', value: 'directLink' },
 					{ name: 'Entry', value: 'entry' },
 					{ name: 'External Entry', value: 'externalEntry' },
 					{ name: 'Filespace', value: 'filespace' },
@@ -57,7 +59,7 @@ export class Lucidlink implements INodeType {
 				required: true,
 				default: '',
 				displayOptions: {
-					show: { resource: ['entry', 'dataStore', 'externalEntry', 'permission'] },
+					show: { resource: ['directLink', 'entry', 'dataStore', 'externalEntry', 'permission'] },
 				},
 				description: 'ID of the filespace to operate on',
 			},
@@ -104,6 +106,7 @@ export class Lucidlink implements INodeType {
 			...filespaceDescription,
 			...entryDescription,
 			...dataStoreDescription,
+			...directLinkDescription,
 			...externalEntryDescription,
 			...groupDescription,
 			...memberDescription,

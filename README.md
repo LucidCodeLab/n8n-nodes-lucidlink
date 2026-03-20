@@ -26,7 +26,13 @@ The package name is **`n8n-nodes-lucidlink`**.
 
 ## Operations
 
-This node covers 8 resources and 36 operations against the LucidLink LucidAPI v1.3.0.
+This node covers 9 resources and 37 operations against the LucidLink LucidAPI v1.3.0.
+
+### Direct Link
+
+| Operation | Description                                                          |
+| --------- | -------------------------------------------------------------------- |
+| Generate  | Generate a shareable direct link to a filesystem entry by ID or path |
 
 ### Filespace
 
@@ -147,7 +153,7 @@ Because the LucidAPI is self-hosted, the base URL must be set in your credential
 
 ### Filespace-scoped resources
 
-Several resources (Entry, Data Store, External Entry, Permission) require a **Filespace ID**. This appears as a shared field at the top of the node when one of those resources is selected.
+Several resources (Direct Link, Entry, Data Store, External Entry, Permission) require a **Filespace ID**. This appears as a shared field at the top of the node when one of those resources is selected.
 
 ### Cursor-based pagination
 
@@ -180,6 +186,10 @@ When creating a filespace with `storageOwner = customer`, an additional set of S
 ---
 
 ## Version history
+
+### 0.1.3
+
+- Added **Direct Link** resource with a Generate operation (`GET /api/v1/filespaces/{filespaceId}/direct-links`)
 
 ### 0.1.0
 
