@@ -26,7 +26,7 @@ The package name is **`n8n-nodes-lucidlink`**.
 
 ## Operations
 
-This node covers 9 resources and 37 operations against the LucidLink LucidAPI v1.3.0.
+This node covers 9 resources and 38 operations against the LucidLink LucidAPI v1.4.2.
 
 ### Direct Link
 
@@ -66,11 +66,12 @@ This node covers 9 resources and 37 operations against the LucidLink LucidAPI v1
 
 ### External Entry
 
-| Operation | Description                                    |
-| --------- | ---------------------------------------------- |
-| Create    | Create a new external entry (SingleObjectFile) |
-| List IDs  | List external entry IDs in a data store        |
-| Delete    | Delete an external entry                       |
+| Operation | Description                                                       |
+| --------- | ----------------------------------------------------------------- |
+| Create    | Create a new external entry (SingleObjectFile or HttpLinkFile)    |
+| Update    | Update the URL of an existing HTTP link file entry                |
+| List IDs  | List external entry IDs in a data store                           |
+| Delete    | Delete an external entry                                          |
 
 ### Group
 
@@ -140,7 +141,7 @@ The LucidLink LucidAPI is self-hosted, so you configure the connection endpoint 
 ## Compatibility
 
 - **Minimum n8n version:** 1.0.0
-- **LucidAPI version:** 1.3.0
+- **LucidAPI version:** 1.4.2
 - Tested against n8n `1.x` running on Node.js 20+
 
 ---
@@ -154,6 +155,17 @@ Because the LucidAPI is self-hosted, the base URL must be set in your credential
 ### Filespace-scoped resources
 
 Several resources (Direct Link, Entry, Data Store, External Entry, Permission) require a **Filespace ID**. This appears as a shared field at the top of the node when one of those resources is selected.
+
+### Cursor-based pagination
+
+### External Entry kinds
+
+When creating an external entry, select the **Kind**:
+
+- **Single Object File (S3)** — links a file from an S3 bucket. Requires a Data Store ID and S3 Object ID.
+- **HTTP Link File** — links a file accessible via a public HTTP/HTTPS URL. Requires only the URL.
+
+The **Update** operation is only applicable to `HttpLinkFile` entries and updates the linked URL.
 
 ### Cursor-based pagination
 
@@ -186,6 +198,14 @@ When creating a filespace with `storageOwner = customer`, an additional set of S
 ---
 
 ## Version history
+
+### 0.1.5
+
+Aligned with LucidLink LucidAPI v1.4.2:
+
+- **External Entry → Create**: added `HttpLinkFile` kind support — choose between `SingleObjectFile` (S3) and `HttpLinkFile` (public HTTP URL) when creating an external entry
+- **External Entry → Update**: new operation to update the URL of an existing `HttpLinkFile` entry (`PATCH /api/v1/filespaces/{filespaceId}/external/entries/{entryId}`)
+- **Data Store → Create**: corrected minimum value for `URL Expiration (Minutes)` from 360 to 4320 (3 days) to match the API spec
 
 ### 0.1.3
 

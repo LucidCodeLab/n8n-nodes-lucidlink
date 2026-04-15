@@ -92,10 +92,10 @@ export const dataStoreCreateDescription: INodeProperties[] = [
 		displayName: 'URL Expiration (Minutes)',
 		name: 's3UrlExpirationMinutes',
 		type: 'number',
-		typeOptions: { minValue: 360, maxValue: 10080 },
+		typeOptions: { minValue: 4320, maxValue: 10080 },
 		default: 10080,
 		displayOptions: { show },
-		description: 'Expiration time for presigned URLs (360–10080 minutes, default 10080)',
+		description: 'Expiration time for presigned URLs (4320–10080 minutes, default 10080)',
 		routing: {
 			send: { type: 'body', property: 's3StorageParams.urlExpirationMinutes' },
 		},

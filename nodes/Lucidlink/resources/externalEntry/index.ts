@@ -2,6 +2,7 @@ import type { INodeProperties } from 'n8n-workflow';
 import { externalEntryCreateDescription } from './create';
 import { externalEntryListIdsDescription } from './listIds';
 import { externalEntryDeleteDescription } from './delete';
+import { externalEntryUpdateDescription } from './update';
 
 export const externalEntryDescription: INodeProperties[] = [
 	{
@@ -15,12 +16,11 @@ export const externalEntryDescription: INodeProperties[] = [
 				name: 'Create',
 				value: 'create',
 				action: 'Create an external entry',
-				description: 'Link an S3 object as a file entry in the filespace',
+				description: 'Link an S3 object or HTTP file as an entry in the filespace',
 				routing: {
 					request: {
 						method: 'POST',
 						url: '=/api/v1/filespaces/{{$parameter["filespaceId"]}}/external/entries',
-						body: { kind: 'SingleObjectFile' },
 					},
 				},
 			},
@@ -48,10 +48,23 @@ export const externalEntryDescription: INodeProperties[] = [
 					},
 				},
 			},
+			{
+				name: 'Update',
+				value: 'update',
+				action: 'Update an external entry',
+				description: 'Update the URL of an existing HTTP link file entry',
+				routing: {
+					request: {
+						method: 'PATCH',
+						url: '=/api/v1/filespaces/{{$parameter["filespaceId"]}}/external/entries/{{$parameter["entryId"]}}',
+					},
+				},
+			},
 		],
 		default: 'listIds',
 	},
 	...externalEntryCreateDescription,
 	...externalEntryListIdsDescription,
 	...externalEntryDeleteDescription,
+	...externalEntryUpdateDescription,
 ];
