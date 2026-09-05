@@ -11,7 +11,8 @@ export const groupAddMembersBulkDescription: INodeProperties[] = [
 		required: true,
 		default: {},
 		displayOptions: { show },
-		description: 'List of group-member relationships to create (1–100 items)',
+		description:
+			'List of group-member relationships to create. The API accepts 1–100 items per request and rejects anything outside that range.',
 		options: [
 			{
 				name: 'membershipValues',

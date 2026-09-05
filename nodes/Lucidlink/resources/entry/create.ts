@@ -22,7 +22,8 @@ export const entryCreateDescription: INodeProperties[] = [
 		required: true,
 		default: '',
 		displayOptions: { show },
-		description: 'Name of the directory to create',
+		description:
+			'Name of the directory to create. "." , ".." and "/" are always rejected. When the filespace has ForbidSpecialCharacters enabled (the default) the characters \\ : * ? " &lt; &gt; |, whitespace-only names, trailing spaces or dots, and Windows reserved names (CON, PRN, AUX, NUL, COM1-9, LPT1-9) are also rejected.',
 		routing: {
 			send: { type: 'body', property: 'name' },
 		},

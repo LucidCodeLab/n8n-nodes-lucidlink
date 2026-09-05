@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { pruneEmptyBodyValues } from '../../helpers';
 import { externalEntryCreateDescription } from './create';
 import { externalEntryListIdsDescription } from './listIds';
 import { externalEntryDeleteDescription } from './delete';
@@ -22,6 +23,7 @@ export const externalEntryDescription: INodeProperties[] = [
 						method: 'POST',
 						url: '=/api/v1/filespaces/{{$parameter["filespaceId"]}}/external/entries',
 					},
+					send: { preSend: [pruneEmptyBodyValues] },
 				},
 			},
 			{
@@ -39,7 +41,7 @@ export const externalEntryDescription: INodeProperties[] = [
 			{
 				name: 'List IDs',
 				value: 'listIds',
-				action: 'List external entry i ds',
+				action: 'List external entry ids',
 				description: 'List all external entry IDs for a given data store',
 				routing: {
 					request: {
@@ -58,6 +60,7 @@ export const externalEntryDescription: INodeProperties[] = [
 						method: 'PATCH',
 						url: '=/api/v1/filespaces/{{$parameter["filespaceId"]}}/external/entries/{{$parameter["entryId"]}}',
 					},
+					send: { preSend: [pruneEmptyBodyValues] },
 				},
 			},
 		],

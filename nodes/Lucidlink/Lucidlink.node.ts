@@ -1,4 +1,5 @@
 import { NodeConnectionTypes, type INodeType, type INodeTypeDescription } from 'n8n-workflow';
+import { unwrapOutput } from './helpers';
 import { filespaceDescription } from './resources/filespace';
 import { entryDescription } from './resources/entry';
 import { dataStoreDescription } from './resources/dataStore';
@@ -7,6 +8,8 @@ import { externalEntryDescription } from './resources/externalEntry';
 import { groupDescription } from './resources/group';
 import { memberDescription } from './resources/member';
 import { permissionDescription } from './resources/permission';
+import { serviceAccountDescription } from './resources/serviceAccount';
+import { serviceAccountKeyDescription } from './resources/serviceAccountKey';
 
 export class Lucidlink implements INodeType {
 	description: INodeTypeDescription = {
@@ -14,7 +17,11 @@ export class Lucidlink implements INodeType {
 		name: 'lucidlink',
 		icon: 'file:lucidlink.svg',
 		group: ['transform'],
-		version: 1,
+		// v1 returns raw LucidAPI responses (wrapped in `data`); v2 unwraps the envelope and
+		// splits lists into one item each. Existing workflows stay pinned to the version they
+		// were saved with, so their expressions keep resolving.
+		version: [1, 2],
+		defaultVersion: 2,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Interact with the self-hosted LucidLink LucidAPI',
 		defaults: {
@@ -48,8 +55,14 @@ export class Lucidlink implements INodeType {
 					{ name: 'Member', value: 'member' },
 					{ name: 'Permission', value: 'permission' },
 					{ name: 'Provider', value: 'provider' },
+					{ name: 'Service Account', value: 'serviceAccount' },
+					{ name: 'Service Account Key', value: 'serviceAccountKey' },
 				],
 				default: 'filespace',
+				// Attached here rather than per operation: this property is always displayed, so
+				// its routing is merged into every request exactly once. Adding it in a second
+				// place would unwrap twice and mangle any payload with its own `data` field.
+				routing: { output: unwrapOutput },
 			},
 			// Shared filespaceId — shown for all filespace-scoped resources
 			{
@@ -111,6 +124,8 @@ export class Lucidlink implements INodeType {
 			...groupDescription,
 			...memberDescription,
 			...permissionDescription,
+			...serviceAccountDescription,
+			...serviceAccountKeyDescription,
 		],
 	};
 }

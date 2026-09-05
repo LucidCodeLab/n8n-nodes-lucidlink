@@ -23,7 +23,7 @@ export const permissionGrantDescription: INodeProperties[] = [
 		required: true,
 		default: '',
 		displayOptions: { show },
-		description: 'ID of the member or group to grant access to',
+		description: 'ID of the member, group or service account to grant access to',
 		routing: {
 			send: { type: 'body', property: 'principalId' },
 		},

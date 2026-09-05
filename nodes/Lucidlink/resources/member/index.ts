@@ -50,7 +50,7 @@ export const memberDescription: INodeProperties[] = [
 			{
 				name: 'Get Groups',
 				value: 'getGroups',
-				action: 'Get a member s groups',
+				action: 'Get groups for a member',
 				description: 'Get the groups that a member belongs to',
 				routing: {
 					request: {

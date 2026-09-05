@@ -73,7 +73,7 @@ export const filespaceCreateDescription: INodeProperties[] = [
 		default: 1024,
 		displayOptions: { show },
 		description:
-			'Block size in KB. Default is 1024 for AWS/BackBlaze, 256 for others. Leave empty to use the default.',
+			'Block size in KB. This value is always sent, so it overrides the provider default (1024 for AWS/BackBlaze, 256 for others). Block size is fixed at creation and cannot be changed later.',
 		routing: {
 			send: { type: 'body', property: 'blockSize' },
 		},
@@ -110,7 +110,7 @@ export const filespaceCreateDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: { show: showCustomer },
 		description:
-			'Endpoint URL for your storage provider. Required if region is not a known provider region.',
+			'Endpoint URL for your storage provider. Required if the region is not a known provider region, and must be left empty if it is. Omitted from the request when empty.',
 		routing: {
 			send: { type: 'body', property: 'customerStorageParams.endpoint' },
 		},

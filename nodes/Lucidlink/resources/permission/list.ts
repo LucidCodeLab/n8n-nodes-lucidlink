@@ -9,7 +9,8 @@ export const permissionListDescription: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		displayOptions: { show },
-		description: 'Filter permissions by principal (member or group) ID (optional)',
+		description:
+			'Filter permissions by principal ID — a member, group or service account ID (optional)',
 		routing: {
 			send: { type: 'query', property: 'principalId', value: '={{$value || undefined}}' },
 		},

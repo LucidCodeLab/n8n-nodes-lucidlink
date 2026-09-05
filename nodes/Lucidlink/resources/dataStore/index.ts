@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { pruneEmptyBodyValues } from '../../helpers';
 import { dataStoreCreateDescription } from './create';
 import { dataStoreGetAllDescription } from './getAll';
 import { dataStoreGetDescription } from './get';
@@ -17,13 +18,13 @@ export const dataStoreDescription: INodeProperties[] = [
 				name: 'Create',
 				value: 'create',
 				action: 'Create a data store',
-				description: 'Create a new S3 data store',
+				description: 'Create a new S3 or HTTP link data store',
 				routing: {
 					request: {
 						method: 'POST',
 						url: '=/api/v1/filespaces/{{$parameter["filespaceId"]}}/external/data-stores',
-						body: { kind: 'S3DataStore' },
 					},
+					send: { preSend: [pruneEmptyBodyValues] },
 				},
 			},
 			{
@@ -66,7 +67,8 @@ export const dataStoreDescription: INodeProperties[] = [
 				name: 'Update Credentials',
 				value: 'update',
 				action: 'Update data store credentials',
-				description: 'Update the S3 access key and secret key for a data store',
+				description:
+					'Update the S3 access key and secret key for a data store. Supported for S3DataStore only.',
 				routing: {
 					request: {
 						method: 'PATCH',

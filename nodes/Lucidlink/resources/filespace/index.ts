@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { pruneEmptyBodyValues } from '../../helpers';
 import { filespaceCreateDescription } from './create';
 import { filespaceGetAllDescription } from './getAll';
 import { filespaceGetDescription } from './get';
@@ -20,6 +21,7 @@ export const filespaceDescription: INodeProperties[] = [
 				description: 'Create a new filespace',
 				routing: {
 					request: { method: 'POST', url: '/api/v1/filespaces' },
+					send: { preSend: [pruneEmptyBodyValues] },
 				},
 			},
 			{

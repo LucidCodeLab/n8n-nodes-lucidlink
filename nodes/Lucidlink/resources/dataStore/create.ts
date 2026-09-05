@@ -1,8 +1,33 @@
 import type { INodeProperties } from 'n8n-workflow';
 
 const show = { operation: ['create'], resource: ['dataStore'] };
+const showS3 = { ...show, kind: ['S3DataStore'] };
 
 export const dataStoreCreateDescription: INodeProperties[] = [
+	{
+		displayName: 'Kind',
+		name: 'kind',
+		type: 'options',
+		required: true,
+		default: 'S3DataStore',
+		displayOptions: { show },
+		description: 'Type of data store to create',
+		options: [
+			{
+				name: 'HTTP Link Data Store',
+				value: 'HttpLinkDataStore',
+				description: 'Data store for HTTP links. No additional parameters are required.',
+			},
+			{
+				name: 'S3 Data Store',
+				value: 'S3DataStore',
+				description: 'Data store backed by S3 cloud object storage. Requires S3 credentials.',
+			},
+		],
+		routing: {
+			send: { type: 'body', property: 'kind' },
+		},
+	},
 	{
 		displayName: 'Name',
 		name: 'name',
@@ -21,7 +46,7 @@ export const dataStoreCreateDescription: INodeProperties[] = [
 		type: 'string',
 		required: true,
 		default: '',
-		displayOptions: { show },
+		displayOptions: { show: showS3 },
 		description: 'Access key for authenticating with S3 cloud storage',
 		routing: {
 			send: { type: 'body', property: 's3StorageParams.accessKey' },
@@ -34,7 +59,7 @@ export const dataStoreCreateDescription: INodeProperties[] = [
 		typeOptions: { password: true },
 		required: true,
 		default: '',
-		displayOptions: { show },
+		displayOptions: { show: showS3 },
 		description: 'Secret key for authenticating with S3 cloud storage',
 		routing: {
 			send: { type: 'body', property: 's3StorageParams.secretKey' },
@@ -46,7 +71,7 @@ export const dataStoreCreateDescription: INodeProperties[] = [
 		type: 'string',
 		required: true,
 		default: '',
-		displayOptions: { show },
+		displayOptions: { show: showS3 },
 		description: 'Name of the S3 bucket',
 		routing: {
 			send: { type: 'body', property: 's3StorageParams.bucketName' },
@@ -58,7 +83,7 @@ export const dataStoreCreateDescription: INodeProperties[] = [
 		type: 'boolean',
 		required: true,
 		default: true,
-		displayOptions: { show },
+		displayOptions: { show: showS3 },
 		description:
 			'Whether to use virtual-hosted-style addressing (true for standard AWS S3; false for path-style / custom endpoints)',
 		routing: {
@@ -70,8 +95,9 @@ export const dataStoreCreateDescription: INodeProperties[] = [
 		name: 's3Region',
 		type: 'string',
 		default: '',
-		displayOptions: { show },
-		description: 'AWS region (e.g. us-east-1). Either Region or Endpoint must be provided.',
+		displayOptions: { show: showS3 },
+		description:
+			'AWS region (e.g. us-east-1). Either Region or Endpoint must be provided. Leave empty to omit it.',
 		routing: {
 			send: { type: 'body', property: 's3StorageParams.region' },
 		},
@@ -81,9 +107,9 @@ export const dataStoreCreateDescription: INodeProperties[] = [
 		name: 's3Endpoint',
 		type: 'string',
 		default: '',
-		displayOptions: { show },
+		displayOptions: { show: showS3 },
 		description:
-			'Custom endpoint URL (e.g. https://s3.amazonaws.com). Either Region or Endpoint must be provided.',
+			'Custom endpoint URL (e.g. https://s3.amazonaws.com). Either Region or Endpoint must be provided. Leave empty to omit it.',
 		routing: {
 			send: { type: 'body', property: 's3StorageParams.endpoint' },
 		},
@@ -94,7 +120,7 @@ export const dataStoreCreateDescription: INodeProperties[] = [
 		type: 'number',
 		typeOptions: { minValue: 4320, maxValue: 10080 },
 		default: 10080,
-		displayOptions: { show },
+		displayOptions: { show: showS3 },
 		description: 'Expiration time for presigned URLs (4320–10080 minutes, default 10080)',
 		routing: {
 			send: { type: 'body', property: 's3StorageParams.urlExpirationMinutes' },

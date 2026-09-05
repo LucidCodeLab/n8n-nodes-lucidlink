@@ -49,7 +49,8 @@ export const memberUpdateDescription: INodeProperties[] = [
 			send: {
 				type: 'body',
 				property: 'filespaceIds',
-				value: '={{$parameter["filespaceIds"].split(",").map((id) => id.trim())}}',
+				// Blank input must not become [''] — the API expects a list of real IDs
+				value: '={{$value.split(",").map((id) => id.trim()).filter((id) => id !== "")}}',
 			},
 		},
 	},
