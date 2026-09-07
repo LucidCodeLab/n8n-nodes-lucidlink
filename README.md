@@ -186,7 +186,7 @@ Several resources (Direct Link, Entry, Data Store, External Entry, Permission) r
 When creating a data store, select the **Kind**:
 
 - **S3 Data Store** (`S3DataStore`) — backed by S3 cloud object storage. Requires Access Key, Secret Key and Bucket Name, plus either **S3 Region** or **S3 Endpoint**.
-- **HTTP Link Data Store** (`HttpLinkDataStore`) — for HTTP links. Requires only a name; no S3 fields are shown.
+- **HTTP Link Data Store** (`HttpLinkDataStore`) — for HTTP links. Requires only a name; no S3 fields are shown. **Only available on filespace format 3.7 and above** — on 3.6 and below the API returns `400 This data store type is not supported`, and you don't need one: create `HttpLinkFile` external entries with the URL alone and leave **HTTP Link Data Store ID** empty.
 
 Optional S3 fields left blank (Region, Endpoint) are omitted from the request body rather than sent as empty strings.
 

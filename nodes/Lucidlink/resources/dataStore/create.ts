@@ -16,7 +16,8 @@ export const dataStoreCreateDescription: INodeProperties[] = [
 			{
 				name: 'HTTP Link Data Store',
 				value: 'HttpLinkDataStore',
-				description: 'Data store for HTTP links. No additional parameters are required.',
+				description:
+					'Data store for HTTP links. Requires filespace format 3.7 or above — older filespaces reject this kind as an unsupported data store type, and do not need one. No other parameters are required.',
 			},
 			{
 				name: 'S3 Data Store',

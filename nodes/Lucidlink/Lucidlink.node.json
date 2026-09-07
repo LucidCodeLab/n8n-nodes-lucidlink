@@ -1,8 +1,8 @@
 {
-	"node": "n8n-nodes-lucidlink",
+	"node": "n8n-nodes-lucidlink.lucidlink",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Files", "Developer Tools"],
+	"categories": ["Data & Storage", "Development"],
 	"resources": {
 		"credentialDocumentation": [
 			{

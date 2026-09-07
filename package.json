@@ -3,7 +3,7 @@
 	"version": "0.2.0",
 	"description": "n8n community node for the self-hosted LucidLink LucidAPI",
 	"license": "MIT",
-	"homepage": "",
+	"homepage": "https://github.com/LucidCodeLab/n8n-nodes-lucidlink#readme",
 	"keywords": [
 		"n8n-community-node-package"
 	],
